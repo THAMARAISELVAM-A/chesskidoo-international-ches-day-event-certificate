@@ -1,0 +1,11 @@
+# Helper/debug scripts (not needed in production)
+extract.js
+inject_rebuilt.js
+inject_toolbar.js
+check_keys.js
+debug_download.js
+test_parse.js
+test_parse2.js
+template_extracted.html
+_ds/
+uploads/

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Chess Day Celebration Certificate</title>
+    <style>
+        :root {
+            --navy: #0d2b55;
+            --gold: #c69a3a;
+            --light-gold: #f2e0a4;
+            --bg: #0a192f;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #102e5c 0%, #061224 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.03);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(198,154,58,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .logos img {
+            max-height: 80px;
+            object-fit: contain;
+        }
+        h1 {
+            color: var(--light-gold);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        p.subtitle {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .gm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .gm-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid rgba(198,154,58,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gm-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .gm-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            filter: grayscale(20%) contrast(1.1);
+        }
+        .gm-name {
+            font-size: 0.95rem;
+            color: var(--light-gold);
+            font-weight: 600;
+        }
+        .form-container {
+            background: rgba(13, 43, 85, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            backdrop-filter: blur(5px);
+        }
+        .form-container label {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 500;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            background: #fff;
+            margin-bottom: 25px;
+            text-align: center;
+            outline: none;
+            color: #0b2a52;
+            font-weight: bold;
+        }
+        .form-container input:focus {
+            box-shadow: 0 0 10px var(--gold);
+        }
+        .btn {
+            background: linear-gradient(135deg, #f2e0a4, #c99a3f);
+            color: #0b2a52;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(198,154,58,0.6);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logos">
+            <img src="logo1.png" alt="Sponsor Logo">
+            <img src="logo2.png" alt="Organizer Logo">
+            <img src="logo3.png" alt="Academy Logo">
+        </div>
+        
+        <h1>International Chess Day Celebration Certificate</h1>
+        <p class="subtitle">Honoring your passion for chess and strategic thinking.</p>
+        
+        <div class="gm-grid">
+            <div class="gm-card">
+                <img src="carlsen.png" alt="Magnus Carlsen">
+                <div class="gm-name">Magnus Carlsen</div>
+            </div>
+            <div class="gm-card">
+                <img src="anand.png" alt="Viswanathan Anand">
+                <div class="gm-name">Viswanathan Anand</div>
+            </div>
+            <div class="gm-card">
+                <img src="gukesh.png" alt="Gukesh D">
+                <div class="gm-name">Gukesh D</div>
+            </div>
+            <div class="gm-card">
+                <img src="kasparov.png" alt="Garry Kasparov">
+                <div class="gm-name">Garry Kasparov</div>
+            </div>
+            <div class="gm-card">
+                <img src="fischer.png" alt="Bobby Fischer">
+                <div class="gm-name">Bobby Fischer</div>
+            </div>
+            <div class="gm-card">
+                <img src="polgar.png" alt="Judit Polgar">
+                <div class="gm-name">Judit Polgar</div>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form id="name-form" onsubmit="generateCertificate(event)">
+                <label for="participant-name">Enter Your Name for the Certificate</label>
+                <input type="text" id="participant-name" required placeholder="e.g. John Doe">
+                <button type="submit" class="btn">Generate Preview</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function generateCertificate(e) {
+            e.preventDefault();
+            const name = document.getElementById('participant-name').value.trim();
+            if (name) {
+                // Redirect to the certificate page with the name as a URL parameter
+                window.location.href = `Chess Certificate 2026.html?name=${encodeURIComponent(name)}`;
+            }
+        }
+    </script>
+</body>
+</html>

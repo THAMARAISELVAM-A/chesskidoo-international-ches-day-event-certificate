@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2acf5d75-964f-4eb1-9706-0585535cc280") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c8216052-ccb9-4e3c-a64d-d12d5fcaa321") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f2d8603b-1048-469a-ba1e-4287fa69aa1e") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("8a6c2723-96b3-41b0-b9a6-8846031b634c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("46f0af2d-63a8-4f63-ba4c-8e7b0e4678cb") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("2acf5d75-964f-4eb1-9706-0585535cc280") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c8216052-ccb9-4e3c-a64d-d12d5fcaa321") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f2d8603b-1048-469a-ba1e-4287fa69aa1e") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("8a6c2723-96b3-41b0-b9a6-8846031b634c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("46f0af2d-63a8-4f63-ba4c-8e7b0e4678cb") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("65f61493-c2d6-4d4b-86ae-d29b2c3edbcc") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("e69c14b7-2002-41ed-8cc5-a325974f9a1f") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("39777d05-8179-4458-97bb-582a3e011ada") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("14ba2f89-77f9-4a8b-b0c4-c25351bbff4b") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ce311537-7ecb-422c-8c55-6973ec6bb106") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("65f61493-c2d6-4d4b-86ae-d29b2c3edbcc") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("e69c14b7-2002-41ed-8cc5-a325974f9a1f") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("39777d05-8179-4458-97bb-582a3e011ada") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("14ba2f89-77f9-4a8b-b0c4-c25351bbff4b") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ce311537-7ecb-422c-8c55-6973ec6bb106") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("a3314bdb-5760-49fd-89f2-263c7a2b68f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("2e463be6-dceb-4452-ad5f-389423a741d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Pinyon Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8e65407f-36e2-42eb-8f9f-121b9501b2a5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Pinyon Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d4c6c656-c949-4b42-a6b7-331b623da8d8") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Pinyon Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("dcc131df-4f8b-4d8a-b140-18c5970ff482") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ee840606-da2e-4bd1-957d-f9ed518068bf") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6b57bcfc-e73c-4b24-9efa-0f7a0b3055e5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f7f87ec1-b505-496e-bc0c-cc450d699731") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("26e8e27d-8405-423b-b87b-ce123f1464b2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("4df038a6-72b1-4c94-bc65-d36c6fe436c8") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("38213dcb-682a-42ed-b99e-0498f35d9943") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("7d6ae921-09ae-438b-8333-31bce9c80170") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f3318815-0ead-4d83-98b6-1b53b6ae75d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("4df038a6-72b1-4c94-bc65-d36c6fe436c8") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("38213dcb-682a-42ed-b99e-0498f35d9943") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("7d6ae921-09ae-438b-8333-31bce9c80170") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f3318815-0ead-4d83-98b6-1b53b6ae75d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("4df038a6-72b1-4c94-bc65-d36c6fe436c8") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("38213dcb-682a-42ed-b99e-0498f35d9943") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("7d6ae921-09ae-438b-8333-31bce9c80170") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f3318815-0ead-4d83-98b6-1b53b6ae75d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("4df038a6-72b1-4c94-bc65-d36c6fe436c8") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("38213dcb-682a-42ed-b99e-0498f35d9943") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("7d6ae921-09ae-438b-8333-31bce9c80170") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("f3318815-0ead-4d83-98b6-1b53b6ae75d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("4df038a6-72b1-4c94-bc65-d36c6fe436c8") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("38213dcb-682a-42ed-b99e-0498f35d9943") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("7d6ae921-09ae-438b-8333-31bce9c80170") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("f3318815-0ead-4d83-98b6-1b53b6ae75d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  body { margin:0; background:#23272e; }
+  ::selection { background:rgba(198,154,58,.3); }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@100..900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div style="position:relative; width:1484px; height:1060px; margin:0 auto; font-family:'Outfit',sans-serif; background:linear-gradient(135deg,#0a2242 0%,#0d2b55 50%,#081d3a 100%); box-shadow:0 30px 80px rgba(0,0,0,.5); overflow:hidden;">
+
+  <!-- gold corner wedges on the navy frame -->
+  <div style="position:absolute; top:0; left:0; width:120px; height:120px; background:linear-gradient(135deg,#f2e0a4,#c99a3f 52%,#7d5418); clip-path:polygon(0 0,100% 0,0 100%);"></div>
+  <div style="position:absolute; top:0; right:0; width:120px; height:120px; background:linear-gradient(225deg,#f2e0a4,#c99a3f 52%,#7d5418); clip-path:polygon(100% 0,100% 100%,0 0);"></div>
+  <div style="position:absolute; bottom:0; left:0; width:120px; height:120px; background:linear-gradient(45deg,#f2e0a4,#c99a3f 52%,#7d5418); clip-path:polygon(0 0,0 100%,100% 100%);"></div>
+  <div style="position:absolute; bottom:0; right:0; width:120px; height:120px; background:linear-gradient(315deg,#f2e0a4,#c99a3f 52%,#7d5418); clip-path:polygon(100% 0,100% 100%,0 100%);"></div>
+
+  <!-- cream paper -->
+  <div style="position:absolute; inset:22px; background:radial-gradient(ellipse 120% 120% at 50% 40%,#f7f3e8 0%,#f2ece0 60%,#ece4d3 100%); border:2px solid #c69a3a; box-shadow:inset 0 0 0 4px #0b2a52, inset 0 0 0 6px #c69a3a; ">
+
+    <!-- inner gold corner brackets -->
+    <svg width="70" height="70" viewBox="0 0 70 70" style="position:absolute; top:14px; left:14px;"><path d="M4 40 L4 4 L40 4" fill="none" stroke="#c69a3a" stroke-width="3"></path><path d="M4 40 L4 4 L40 4" fill="none" stroke="#0b2a52" stroke-width="1" opacity=".4"></path></svg>
+    <svg width="70" height="70" viewBox="0 0 70 70" style="position:absolute; top:14px; right:14px; transform:scaleX(-1);"><path d="M4 40 L4 4 L40 4" fill="none" stroke="#c69a3a" stroke-width="3"></path></svg>
+    <svg width="70" height="70" viewBox="0 0 70 70" style="position:absolute; bottom:66px; left:14px; transform:scaleY(-1);"><path d="M4 40 L4 4 L40 4" fill="none" stroke="#c69a3a" stroke-width="3"></path></svg>
+    <svg width="70" height="70" viewBox="0 0 70 70" style="position:absolute; bottom:66px; right:14px; transform:scale(-1,-1);"><path d="M4 40 L4 4 L40 4" fill="none" stroke="#c69a3a" stroke-width="3"></path></svg>
+
+    <div style="position:absolute; inset:24px; border:1px solid rgba(198,154,58,.45); border-radius:2px; pointer-events:none;"></div>
+
+    <!-- watercolour wash accents -->
+    <div style="position:absolute; top:40px; left:0; width:230px; height:940px; background:radial-gradient(ellipse 60% 30% at 40% 20%,rgba(30,60,110,.18),transparent 70%),radial-gradient(ellipse 55% 25% at 55% 55%,rgba(30,60,110,.15),transparent 70%),radial-gradient(ellipse 60% 22% at 45% 85%,rgba(30,60,110,.16),transparent 70%); pointer-events:none;"></div>
+    <div style="position:absolute; top:40px; right:0; width:230px; height:940px; background:radial-gradient(ellipse 60% 22% at 60% 22%,rgba(30,60,110,.16),transparent 70%),radial-gradient(ellipse 55% 25% at 45% 58%,rgba(30,60,110,.15),transparent 70%),radial-gradient(ellipse 60% 26% at 55% 85%,rgba(30,60,110,.16),transparent 70%); pointer-events:none;"></div>
+
+    <!-- ===== LEFT PORTRAIT COLUMN ===== -->
+    <div style="position:absolute; left:14px; top:70px; bottom:96px; width:192px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="carlsen.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">MAGNUS</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">CARLSEN</div></div>
+      </div>
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="anand.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:18px; letter-spacing:.5px; color:#0b2a52;">VISWANATHAN</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">ANAND</div></div>
+      </div>
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="gukesh.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">GUKESH</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">DAMOTHIRAN</div></div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT PORTRAIT COLUMN ===== -->
+    <div style="position:absolute; right:14px; top:70px; bottom:96px; width:192px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="kasparov.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">GARRY</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">KASPAROV</div></div>
+      </div>
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="fischer.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">BOBBY</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">FISCHER</div></div>
+      </div>
+      <div style="width:190px; text-align:center;">
+        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="polgar.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">JUDIT</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">POLGÁR</div></div>
+      </div>
+    </div>
+
+    <!-- ===== CENTER CONTENT ===== -->
+    <div style="position:absolute; left:214px; right:214px; top:34px; bottom:190px; display:flex; flex-direction:column; align-items:center;">
+
+      <!-- logos row -->
+      <div style="width:100%; display:flex; justify-content:space-between; align-items:flex-start;">
+        <div style="width:110px; height:118px; margin-left:34px;"><img src="logo1.png" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div style="display:flex; flex-direction:column; align-items:center; margin-top:2px;">
+          <div style="width:340px; height:96px;"><img src="logo2.png" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:120px; height:96px;"><img src="logo3.png" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div style="margin-top:4px; font-size:12px; font-weight:700; color:#3a3a3a; letter-spacing:.4px;">Institution Reg. No.: TN-07-01127105</div>
+        </div>
+      </div>
+
+      <!-- titles -->
+      <div style="font-family:'Playfair Display',serif; font-weight:800; font-size:47px; color:#0b2a52; letter-spacing:1px; margin-top:16px; text-align:center;">INTERNATIONAL CHESS DAY 2026</div>
+      <div style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:56px; letter-spacing:1.5px; line-height:1; margin-top:8px; background:linear-gradient(180deg,#e7ca7c 0%,#c39433 45%,#8a5f1e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; text-align:center;">Memorable Appreciation Certificate</div>
+
+      <!-- diamond divider -->
+      <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
+        <div style="width:120px; height:1.5px; background:linear-gradient(90deg,transparent,#c69a3a);"></div>
+        <div style="width:11px; height:11px; background:#c69a3a; transform:rotate(45deg);"></div>
+        <div style="width:120px; height:1.5px; background:linear-gradient(90deg,#c69a3a,transparent);"></div>
+      </div>
+
+      <div style="font-size:24px; color:#0b2a52; margin-top:12px; letter-spacing:.3px;">This certificate is proudly presented to</div>
+
+      <!-- name with laurels -->
+      <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:2px;">
+        <svg width="86" height="180" viewBox="0 0 86 180" fill="#c69a3a"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
+        <div contenteditable="true" spellcheck="false" style="font-family:'Pinyon Script',cursive; font-size:84px; color:#12345f; line-height:1; padding:0 6px; outline:none; min-width:340px; text-align:center;">Participant Name</div>
+        <svg width="86" height="180" viewBox="0 0 86 180" fill="#c69a3a" style="transform:scaleX(-1);"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
+      </div>
+
+      <!-- event date ribbon -->
+      <div style="position:relative; margin-top:6px; background:#0f3a68; border:2px solid #c69a3a; padding:11px 46px; clip-path:polygon(18px 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0 50%); display:flex; align-items:center; gap:12px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e7ca7c" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+        <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; letter-spacing:1px; color:#f4efe1; white-space:nowrap;">EVENT DATE : <span style="color:#e7ca7c;">18<sup style="font-size:.6em;">TH</sup></span> OF JULY 2026</span>
+      </div>
+
+      <!-- paragraph -->
+      <div style="margin-top:16px; text-align:center; font-size:19.5px; line-height:1.5; color:#1c2a44; max-width:660px;">
+        in appreciation of enthusiastic participation and support for the celebration of <b style="color:#a8201e;">INTERNATIONAL CHESS DAY 2026</b> organized by <b style="color:#a8201e;">SKT Educational Trust, Poolampatti</b> in association with<br><b style="color:#0b2a52;">ChessKidoo Chess Academy.</b><br>Your passion for chess contributes to the growth of strategic thinking, sportsmanship, and the global chess community.
+      </div>
+    </div>
+
+    <!-- signature -->
+    <div style="position:absolute; left:50%; transform:translateX(-50%); bottom:78px; text-align:center;">
+      <div style="font-family:'Pinyon Script',cursive; font-size:44px; color:#12345f; line-height:.8;">Ranjith A.S.</div>
+      <div style="width:210px; height:1.5px; background:#1c2a44; margin:6px auto 0;"></div>
+      <div style="font-size:16px; font-weight:700; letter-spacing:1px; color:#0b2a52; margin-top:7px;">CHESSKIDOO CHESS ACADEMY</div>
+      <div style="font-size:15px; color:#1c2a44; margin-top:2px;">Director</div>
+    </div>
+
+
+    <!-- bottom banner -->
+    <div style="position:absolute; left:0; right:0; bottom:0; height:52px; border-top:2px solid #c69a3a; border-bottom:2px solid #c69a3a; display:flex; align-items:center; justify-content:center; gap:16px; background:transparent;">
+      <span style="color:#c69a3a; font-size:16px;">★</span>
+      <span style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:21px; letter-spacing:1px; color:#0b2a52;">Celebrating the timeless legacy of chess and the masters who inspired generations.</span>
+      <span style="color:#c69a3a; font-size:16px;">★</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+    // --- Injected logic for Front Page Integration ---
+    setTimeout(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let name = urlParams.get('name');
+        if (name) {
+            name = name.toUpperCase();
+            const nameEl = document.querySelector('[contenteditable="true"]');
+            if (nameEl) {
+                nameEl.innerText = name;
+                nameEl.style.fontFamily = "'Outfit', sans-serif";
+                nameEl.style.fontWeight = "700";
+                nameEl.style.fontSize = "48px";
+            }
+        }
+
+        const toolbar = document.createElement('div');
+        toolbar.className = 'cert-toolbar';
+        toolbar.style.cssText = 'position:fixed; top:20px; right:20px; display:flex; gap:10px; z-index:99999; font-family:-apple-system, BlinkMacSystemFont, sans-serif;';
+
+        const mkBtn = (text, bg, fg, border) => {
+            const b = document.createElement('button');
+            b.innerText = text;
+            b.style.cssText = 'padding:12px 24px; background:' + bg + '; color:' + fg + '; border:' + (border || 'none') + '; border-radius:6px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3); transition:transform 0.1s;';
+            b.onmouseenter = () => b.style.transform = 'scale(1.05)';
+            b.onmouseleave = () => b.style.transform = 'scale(1)';
+            return b;
+        };
+
+        const btnBack = mkBtn('\u2190 Back', '#0b2a52', '#c69a3a', '2px solid #c69a3a');
+        btnBack.onclick = () => { window.location.href = 'index.html'; };
+
+        const btnPrint = mkBtn('\ud83d\udda8 Print', '#c69a3a', '#0b2a52');
+        btnPrint.onclick = () => {
+            toolbar.style.display = 'none';
+            window.print();
+            toolbar.style.display = 'flex';
+        };
+
+        toolbar.appendChild(btnBack);
+        toolbar.appendChild(btnPrint);
+        document.body.appendChild(toolbar);
+
+        // Print CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @media print {
+                .cert-toolbar { display: none !important; }
+                @page { size: landscape; margin: 0; }
+                html, body {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                }
+                div[style*="1484px"] {
+                    /* Scale certificate to fill the full printed page */
+                    transform-origin: top left;
+                    transform: scale(calc(100vw / 1484px), calc(100vh / 1060px));
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                    margin: 0 !important;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }, 200);
+</script>
