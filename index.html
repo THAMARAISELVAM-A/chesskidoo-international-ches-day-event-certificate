@@ -144,6 +144,50 @@
             box-shadow: 0 0 20px rgba(198,154,58,0.6);
             transform: scale(1.02);
         }
+        /* ===== Mobile Responsive ===== */
+        @media (max-width: 768px) {
+            .container { padding: 20px 12px; }
+            .logos {
+                gap: 15px;
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+            .logos img { max-height: 50px; }
+            h1 {
+                font-size: 1.4rem;
+                letter-spacing: 1px;
+            }
+            p.subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+            }
+            .gm-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+            .gm-card { padding: 6px; }
+            .gm-card img { height: 100px; }
+            .gm-name { font-size: 0.75rem; }
+            .form-container {
+                padding: 20px 15px;
+                margin: 0 auto 25px auto;
+            }
+            .form-container label { font-size: 1rem; }
+            .form-container input {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 400px) {
+            h1 { font-size: 1.15rem; }
+            .gm-grid { grid-template-columns: repeat(2, 1fr); }
+            .gm-card img { height: 90px; }
+        }
     </style>
 </head>
 <body>

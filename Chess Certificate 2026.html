@@ -727,9 +727,42 @@
         toolbar.appendChild(btnPrint);
         document.body.appendChild(toolbar);
 
-        // Print CSS
+        // Responsive + Print CSS
         const style = document.createElement('style');
         style.textContent = `
+            /* === Mobile: scale the fixed-size certificate to fit the viewport === */
+            @media screen and (max-width: 1500px) {
+                html, body {
+                    margin: 0; padding: 0;
+                    overflow-x: hidden;
+                    background: #23272e;
+                }
+                div[style*="1484px"] {
+                    transform-origin: top left;
+                    transform: scale(calc(100vw / 1484px));
+                    margin-bottom: -200px; /* prevent massive whitespace below scaled element */
+                }
+                .cert-toolbar {
+                    top: 10px !important;
+                    right: 10px !important;
+                    gap: 6px !important;
+                }
+                .cert-toolbar button {
+                    padding: 8px 12px !important;
+                    font-size: 12px !important;
+                }
+            }
+            @media screen and (max-width: 500px) {
+                div[style*="1484px"] {
+                    margin-bottom: -500px;
+                }
+                .cert-toolbar button {
+                    padding: 6px 10px !important;
+                    font-size: 11px !important;
+                }
+            }
+
+            /* === Print: fill the entire landscape page === */
             @media print {
                 .cert-toolbar { display: none !important; }
                 @page { size: landscape; margin: 0; }
@@ -743,7 +776,6 @@
                     print-color-adjust: exact;
                 }
                 div[style*="1484px"] {
-                    /* Scale certificate to fill the full printed page */
                     transform-origin: top left;
                     transform: scale(calc(100vw / 1484px), calc(100vh / 1060px));
                     page-break-inside: avoid;

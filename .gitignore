@@ -9,3 +9,5 @@ test_parse2.js
 template_extracted.html
 _ds/
 uploads/
+
+.vercel
