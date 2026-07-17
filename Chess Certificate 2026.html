@@ -635,8 +635,8 @@
       </div>
 
       <!-- titles -->
-      <div style="font-family:'Playfair Display',serif; font-weight:800; font-size:47px; color:#0b2a52; letter-spacing:1px; margin-top:16px; text-align:center;">INTERNATIONAL CHESS DAY 2026</div>
-      <div style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:56px; letter-spacing:1.5px; line-height:1; margin-top:8px; background:linear-gradient(180deg,#e7ca7c 0%,#c39433 45%,#8a5f1e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; text-align:center;">Memorable Appreciation Certificate</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:800; font-size:44px; color:#0b2a52; letter-spacing:1px; margin-top:16px; text-align:center; white-space:nowrap;">INTERNATIONAL CHESS DAY 2026</div>
+      <div style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:48px; letter-spacing:1px; line-height:1; margin-top:8px; background:linear-gradient(180deg,#e7ca7c 0%,#c39433 45%,#8a5f1e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; text-align:center; white-space:nowrap;">Memorable Appreciation Certificate</div>
 
       <!-- diamond divider -->
       <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
@@ -678,7 +678,7 @@
     <!-- bottom banner -->
     <div style="position:absolute; left:0; right:0; bottom:0; height:52px; border-top:2px solid #c69a3a; border-bottom:2px solid #c69a3a; display:flex; align-items:center; justify-content:center; gap:16px; background:transparent;">
       <span style="color:#c69a3a; font-size:16px;">★</span>
-      <span style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:21px; letter-spacing:1px; color:#0b2a52;">Celebrating the timeless legacy of chess and the masters who inspired generations.</span>
+      <span style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:19px; letter-spacing:1px; color:#0b2a52; white-space:nowrap;">Celebrating the timeless legacy of chess and the masters who inspired generations.</span>
       <span style="color:#c69a3a; font-size:16px;">★</span>
     </div>
 
@@ -745,6 +745,17 @@
         const cert = document.querySelector('div[style*="1484px"]');
         if (cert) cert.classList.add('cert-root');
 
+        // Wrap the fixed-size certificate so on-screen scaling reserves ONLY the
+        // scaled footprint — otherwise the un-shrunk 1060px layout box leaves a
+        // huge blank area below the certificate on phones/tablets.
+        let certWrap = null;
+        if (cert) {
+            certWrap = document.createElement('div');
+            certWrap.className = 'cert-wrap';
+            cert.parentNode.insertBefore(certWrap, cert);
+            certWrap.appendChild(cert);
+        }
+
         // --- Download as PDF: render the certificate to a high-res image, wrap in a PDF ---
         function loadScript(src) {
             return new Promise((resolve, reject) => {
@@ -763,6 +774,20 @@
                 await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
             }
         }
+        // Make sure every <img> in the certificate is fully decoded before we
+        // rasterise, otherwise portraits/logos can come out blank in the capture.
+        async function waitForImages(root) {
+            const imgs = Array.from(root.querySelectorAll('img'));
+            await Promise.all(imgs.map(img => {
+                if (img.complete && img.naturalWidth) {
+                    return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+                }
+                return new Promise(res => {
+                    img.addEventListener('load', res, { once: true });
+                    img.addEventListener('error', res, { once: true });
+                });
+            }));
+        }
         async function downloadPdf() {
             if (!cert) return;
             const label = btnDownload.innerText;
@@ -778,27 +803,52 @@
                 .find(s => s.textContent.indexOf('cyrillic-ext') !== -1 && s.textContent.indexOf('@font-face') !== -1);
             try {
                 await ensureLibs();
-                if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
-                if (brokenFonts) brokenFonts.remove();
-                toolbar.style.display = 'none';
-                // Capture at full native resolution, independent of the screen size
+                // Reset to native 1484x1060 BEFORE capturing so the whole board is
+                // rendered regardless of the on-screen (mobile) scale factor.
                 cert.style.transform = 'none';
                 cert.style.marginBottom = '0';
-                const dataUrl = await window.htmlToImage.toPng(cert, {
+                toolbar.style.display = 'none';
+                if (brokenFonts) brokenFonts.remove();
+                // Wait for fonts AND images so nothing renders blank.
+                if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
+                await waitForImages(cert);
+
+                const opts = {
                     width: 1484,
                     height: 1060,
                     pixelRatio: 2,
-                    cacheBust: true,
                     backgroundColor: '#ffffff',
                     style: { transform: 'none', margin: '0' }
-                });
+                };
+                // Pre-compute the web-font CSS once. If it fails (offline / CORS),
+                // fall back to skipping fonts instead of aborting the whole export.
+                if (window.htmlToImage.getFontEmbedCSS) {
+                    try {
+                        opts.fontEmbedCSS = await window.htmlToImage.getFontEmbedCSS(cert);
+                    } catch (e) { opts.skipFonts = true; }
+                }
+
+                // html-to-image's first pass frequently misses late-resolving
+                // images/fonts, so warm up once and keep the second, complete render.
+                await window.htmlToImage.toPng(cert, opts);
+                await new Promise(r => setTimeout(r, 120));
+                const dataUrl = await window.htmlToImage.toPng(cert, opts);
+
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [1484, 1060] });
                 pdf.addImage(dataUrl, 'PNG', 0, 0, 1484, 1060);
-                const safe = (name || 'Certificate').replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '') || 'Certificate';
+                // Use the name currently shown on the certificate for the filename.
+                const nameEl = document.querySelector('[contenteditable="true"]');
+                const liveName = ((nameEl && nameEl.innerText) || name || 'Certificate').trim();
+                const safe = liveName.replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '') || 'Certificate';
                 pdf.save('ChessDay-Certificate-' + safe + '.pdf');
             } catch (err) {
-                alert('Sorry \u2014 could not generate the PDF.\n' + (err && err.message ? err.message : err) + '\nPlease check your internet connection and try again.');
+                const msg = (err && err.message) ? err.message : String(err);
+                const isLocalFile = location.protocol === 'file:';
+                alert('Sorry \u2014 could not generate the PDF.\n' + msg + '\n\n' +
+                    (isLocalFile
+                        ? 'Tip: open this page through the published link or a local web server (not as a file:// document) so the images can be captured.'
+                        : 'Please check your internet connection and try again.'));
             } finally {
                 if (brokenFonts && !brokenFonts.parentNode) document.head.appendChild(brokenFonts);
                 cert.style.transform = savedTransform;
@@ -839,6 +889,13 @@
             /* === Print: always fit on ONE page, whatever the orientation === */
             @media print {
                 .cert-toolbar { display: none !important; }
+                /* Undo the on-screen wrapper sizing so the full certificate prints */
+                .cert-wrap {
+                    width: auto !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    margin: 0 !important;
+                }
                 @page { size: landscape; margin: 0; }
                 html, body {
                     margin: 0 !important;
@@ -881,20 +938,19 @@
         `;
         document.head.appendChild(style);
 
-        // === Valid viewport scaling (replaces the invalid calc(100vw / 1484px)) ===
+        // === Viewport scaling: scale the certificate down to fit the screen and
+        // give its wrapper the EXACT scaled size so there's no leftover whitespace. ===
         function fitCert() {
-            if (!cert || window.matchMedia('print').matches) return;
+            if (!cert || !certWrap || window.matchMedia('print').matches) return;
             const vw = document.documentElement.clientWidth;
             const scale = Math.min(vw / 1484, 1);
             cert.style.transformOrigin = 'top left';
-            if (scale < 1) {
-                cert.style.transform = 'scale(' + scale + ')';
-                // Transform doesn't shrink layout box; pull following space back up
-                cert.style.marginBottom = (-1060 * (1 - scale)) + 'px';
-            } else {
-                cert.style.transform = 'none';
-                cert.style.marginBottom = '0';
-            }
+            cert.style.transform = scale < 1 ? 'scale(' + scale + ')' : 'none';
+            cert.style.margin = '0';
+            certWrap.style.width = (1484 * scale) + 'px';
+            certWrap.style.height = (1060 * scale) + 'px';
+            certWrap.style.margin = '0 auto';
+            certWrap.style.overflow = 'hidden';
         }
         window.addEventListener('resize', fitCert);
         window.addEventListener('orientationchange', fitCert);
