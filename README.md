@@ -1,6 +1,6 @@
 # ♟️ International Chess Day 2026 — Event Certificate Generator
 
-A web-based certificate generator built to celebrate **International Chess Day 2026**, organized by **SKT Educational Trust, Poolampatti** in association with **ChessKidoo Chess Academy**.
+A web-based certificate generator built to celebrate **International Chess Day 2026**, organized by **ChessKidoo Chess Academy**.
 
 Participants can enter their name, preview a personalized **Memorable Appreciation Certificate**, and print it — all from the browser with zero setup.
 
@@ -8,7 +8,7 @@ Participants can enter their name, preview a personalized **Memorable Appreciati
 
 ## ✨ Features
 
-- 🏠 **Landing Page** — Beautiful front page featuring legendary Chess Grandmasters (Magnus Carlsen, Viswanathan Anand, Garry Kasparov, Bobby Fischer, Gukesh Damothiran, Judit Polgár)
+- 🏠 **Landing Page** — Beautiful front page featuring legendary Chess Grandmasters (Magnus Carlsen, Viswanathan Anand, Garry Kasparov, Bobby Fischer, Gukesh Damothiran, Rathanvel V S)
 - 📝 **Name Entry** — Simple form to enter participant name
 - 🔠 **Auto Uppercase** — Names are automatically converted to uppercase for a professional look
 - 📜 **Live Certificate Preview** — Instantly generates a personalized certificate with the entered name
@@ -46,8 +46,7 @@ Then visit [http://localhost:8080](http://localhost:8080)
 ├── gukesh.png                    # Gukesh Damothiran photo
 ├── kasparov.png                  # Garry Kasparov photo
 ├── fischer.png                   # Bobby Fischer photo
-├── polgar.png                    # Judit Polgár photo
-├── logo1.png                     # SKT School logo
+├── rathanvel.png                 # Rathanvel V S photo
 ├── logo2.png                     # ChessKidoo logo
 ├── logo3.png                     # MSME logo
 ├── .gitignore
@@ -73,9 +72,8 @@ No frameworks. No build tools. No dependencies. Just open and run.
 | Detail | Info |
 |--------|------|
 | **Event** | International Chess Day 2026 |
-| **Date** | 18th July 2026 |
-| **Organizer** | SKT Educational Trust, Poolampatti |
-| **Association** | ChessKidoo Chess Academy |
+| **Date** | 19th July 2026 |
+| **Organizer** | ChessKidoo Chess Academy |
 | **Director** | Ranjith A.S. |
 
 ---
