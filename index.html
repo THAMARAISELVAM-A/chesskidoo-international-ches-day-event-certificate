@@ -59,8 +59,24 @@
         p.subtitle {
             color: #ccc;
             font-size: 1.2rem;
-            margin-bottom: 40px;
+            margin-bottom: 12px;
             font-style: italic;
+        }
+        p.organizer {
+            display: inline-block;
+            color: var(--light-gold);
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: .6px;
+            margin-bottom: 34px;
+            padding: 9px 22px;
+            border: 1px solid rgba(198, 154, 58, .6);
+            border-radius: 999px;
+            background: rgba(198, 154, 58, .1);
+        }
+        p.organizer strong {
+            font-weight: 800;
+            color: #f2e0a4;
         }
         .gm-grid {
             display: grid;
@@ -240,7 +256,12 @@
             }
             p.subtitle {
                 font-size: 0.95rem;
-                margin-bottom: 25px;
+                margin-bottom: 10px;
+            }
+            p.organizer {
+                font-size: 0.85rem;
+                padding: 7px 14px;
+                margin-bottom: 22px;
             }
             .gm-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -289,7 +310,8 @@
         </div>
         
         <h1>Thindal Grandmaster Trophy Celebration Certificate</h1>
-        <p class="subtitle">Venue: PILA SCHOOL, Parvesh International Learners Academy — honoring your passion for chess and strategic thinking.</p>
+        <p class="subtitle">Event Date: 4<sup>th</sup> October 2026 &middot; Venue: PILA SCHOOL, Parvesh International Learners Academy</p>
+        <p class="organizer">Managed &amp; Coordinated by <strong>Hindusthan Chess Cell</strong></p>
         
         <div class="gm-grid">
             <div class="gm-card">
@@ -367,47 +389,68 @@
     </div>
 
     <script>
-        const PLACE_LABELS = {
-            '1': 'FIRST PLACE',
-            '2': 'SECOND PLACE',
-            '3': 'THIRD PLACE',
-            '4': 'FOURTH PLACE',
-            '5': 'FIFTH PLACE'
-        };
+        const PLACE_ORDINALS = [
+            '', 'First', 'Second', 'Third', 'Fourth', 'Fifth',
+            'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'
+        ];
+        const MAX_PLACE_JUNIOR = 5;
+        const MAX_PLACE_OPEN = 10;
+        const placeLabel = n => PLACE_ORDINALS[n] ? PLACE_ORDINALS[n] + ' Place' : '';
 
         const subCategoryWrap = document.getElementById('subCategoryWrap');
         const syncSubCategory = () => {
             subCategoryWrap.classList.toggle('show', document.getElementById('catJunior').checked);
         };
         document.querySelectorAll('input[name="category"]').forEach(radio => {
-            radio.addEventListener('change', syncSubCategory);
+            radio.addEventListener('change', () => {
+                syncSubCategory();
+                syncPlaceLimit();
+            });
         });
         syncSubCategory();
 
         const placeWrap = document.getElementById('placeWrap');
         const placeInput = document.getElementById('placeInput');
         const placePreview = document.getElementById('placePreview');
-        const PLACE_HINT = '1 = First Place · 2 = Second Place · 3 = Third Place · 4 = Fourth Place · 5 = Fifth Place';
 
-        const syncRole = () => {
-            placeWrap.classList.toggle('show', document.getElementById('roleWinner').checked);
+        // Junior age groups are podium + 2, the Open category awards 10 places.
+        function maxPlace() {
+            return document.getElementById('catSenior').checked ? MAX_PLACE_OPEN : MAX_PLACE_JUNIOR;
+        }
+        function placeHint() {
+            const limit = maxPlace();
+            const parts = [];
+            for (let i = 1; i <= limit; i++) parts.push(i + ' = ' + placeLabel(i));
+            return parts.join(' \u00b7 ');
+        }
+        function syncPlaceLimit() {
+            const limit = maxPlace();
+            placeInput.max = limit;
+            placeInput.placeholder = '1 - ' + limit;
             syncPlacePreview();
-        };
+        }
 
         function normalisePlace() {
             const raw = parseInt(placeInput.value, 10);
-            return Number.isNaN(raw) ? '' : Math.min(5, Math.max(1, raw));
+            if (Number.isNaN(raw)) return '';
+            return Math.min(maxPlace(), Math.max(1, raw));
         }
 
         function syncPlacePreview() {
             const place = normalisePlace();
-            placePreview.textContent = place ? 'AWARD : ' + PLACE_LABELS[place] : PLACE_HINT;
+            placePreview.textContent = place ? 'AWARD : ' + placeLabel(place).toUpperCase() : placeHint();
         }
+
+        const syncRole = () => {
+            placeWrap.classList.toggle('show', document.getElementById('roleWinner').checked);
+            syncPlaceLimit();
+        };
 
         document.querySelectorAll('input[name="role"]').forEach(radio => {
             radio.addEventListener('change', syncRole);
         });
         placeInput.addEventListener('input', syncPlacePreview);
+
         syncRole();
 
         const WINNER_CODE = 'CHESSKIDOO37';
@@ -447,7 +490,7 @@
                 return;
             }
             if (isWinner && !place) {
-                setCodeMessage('Enter the place (1-5) for this winner', false);
+                setCodeMessage('Enter the place (1-' + maxPlace() + ') for this winner', false);
                 placeInput.focus();
                 return;
             }

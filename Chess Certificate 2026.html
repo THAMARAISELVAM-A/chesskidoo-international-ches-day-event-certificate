@@ -12,6 +12,26 @@
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@100..900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+<!--
+  The PDF exporter (html-to-image) has to read the @font-face rules to embed the
+  web fonts in the exported image, and it cannot read the rules of a cross-origin
+  <link>. So mirror the exact same Google Fonts CSS into an INLINE <style>, which
+  is same-origin and therefore readable. The <link> above stays as the fast path
+  (and as the fallback if this fetch is blocked).
+-->
+<style id="fontFaceMirror"></style>
+<script>
+(function () {
+  var href = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+  var mirror = document.getElementById('fontFaceMirror');
+  if (!href || !mirror) return;
+  window.__fontMirrorReady = fetch(href.href)
+    .then(function (r) { return r.text(); })
+    .then(function (css) { mirror.textContent = css; return true; })
+    .catch(function () { return false; });
+})();
+</script>
 </head>
 <body>
 
@@ -24,7 +44,7 @@
   <div style="position:absolute; bottom:0; right:0; width:120px; height:120px; background:linear-gradient(315deg,#f2e0a4,#c99a3f 52%,#7d5418); clip-path:polygon(100% 0,100% 100%,0 100%);"></div>
 
   <!-- cream paper -->
-  <div style="position:absolute; inset:22px; background:radial-gradient(ellipse 120% 120% at 50% 40%,#f7f3e8 0%,#f2ece0 60%,#ece4d3 100%); border:2px solid #c69a3a; box-shadow:inset 0 0 0 4px #0b2a52, inset 0 0 0 6px #c69a3a; ">
+  <div id="certPaper" style="position:absolute; inset:22px; background:radial-gradient(ellipse 120% 120% at 50% 40%,#f7f3e8 0%,#f2ece0 60%,#ece4d3 100%); border:2px solid #c69a3a; box-shadow:inset 0 0 0 4px #0b2a52, inset 0 0 0 6px #c69a3a; ">
 
     <!-- inner gold corner brackets -->
     <svg width="70" height="70" viewBox="0 0 70 70" style="position:absolute; top:14px; left:14px;"><path d="M4 40 L4 4 L40 4" fill="none" stroke="#c69a3a" stroke-width="3"></path><path d="M4 40 L4 4 L40 4" fill="none" stroke="#0b2a52" stroke-width="1" opacity=".4"></path></svg>
@@ -39,121 +59,128 @@
     <div style="position:absolute; top:40px; right:0; width:230px; height:940px; background:radial-gradient(ellipse 60% 22% at 60% 22%,rgba(30,60,110,.16),transparent 70%),radial-gradient(ellipse 55% 25% at 45% 58%,rgba(30,60,110,.15),transparent 70%),radial-gradient(ellipse 60% 26% at 55% 85%,rgba(30,60,110,.16),transparent 70%); pointer-events:none;"></div>
 
     <!-- ===== LEFT PORTRAIT COLUMN ===== -->
-    <div style="position:absolute; left:14px; top:70px; bottom:96px; width:192px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="carlsen.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">MAGNUS</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">CARLSEN</div></div>
+    <div style="position:absolute; left:10px; top:64px; bottom:90px; width:200px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="carlsen.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#0b2a52;">MAGNUS</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">CARLSEN</div></div>
       </div>
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="anand.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:18px; letter-spacing:.5px; color:#0b2a52;">VISWANATHAN</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">ANAND</div></div>
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="anand.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:21px; letter-spacing:.5px; color:#0b2a52;">VISWANATHAN</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">ANAND</div></div>
       </div>
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="gukesh.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">GUKESH</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">DAMOTHIRAN</div></div>
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 52% 46%,#000 52%,transparent 80%);"><img src="gukesh.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#0b2a52;">GUKESH</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">DAMOTHIRAN</div></div>
       </div>
     </div>
 
     <!-- ===== RIGHT PORTRAIT COLUMN ===== -->
-    <div style="position:absolute; right:14px; top:70px; bottom:96px; width:192px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="kasparov.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">GARRY</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">KASPAROV</div></div>
+    <div style="position:absolute; right:10px; top:64px; bottom:90px; width:200px; display:flex; flex-direction:column; justify-content:space-between; align-items:center;">
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="kasparov.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#0b2a52;">GARRY</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">KASPAROV</div></div>
       </div>
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="fischer.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">BOBBY</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">FISCHER</div></div>
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="fischer.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#0b2a52;">BOBBY</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">FISCHER</div></div>
       </div>
-      <div style="width:190px; text-align:center;">
-        <div style="width:186px; height:210px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="rathanvel.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div style="margin-top:2px; line-height:1.05;"><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#0b2a52;">RATHANVEL</div><div style="font-weight:900; font-size:20px; letter-spacing:1px; color:#c69a3a;">V S</div></div>
+      <div style="width:198px; text-align:center;">
+        <div style="width:196px; height:226px; -webkit-mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%); mask-image:radial-gradient(ellipse 78% 80% at 48% 46%,#000 52%,transparent 80%);"><img src="rathanvel.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="margin-top:4px; line-height:1.05;"><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#0b2a52;">RATHANVEL</div><div style="font-weight:900; font-size:23px; letter-spacing:1px; color:#c69a3a;">V S</div></div>
       </div>
     </div>
 
     <!-- ===== CENTER CONTENT ===== -->
-    <div style="position:absolute; left:214px; right:214px; top:34px; bottom:190px; display:flex; flex-direction:column; align-items:center;">
+    <div id="certCenter" style="position:absolute; left:222px; right:222px; top:18px; bottom:174px; display:flex; flex-direction:column; align-items:center; justify-content:space-between;">
 
       <!-- logos row -->
       <div style="width:100%; display:flex; justify-content:space-evenly; align-items:center;">
-        <div style="display:flex; flex-direction:column; align-items:center; margin-top:2px;">
-          <div style="width:340px; height:96px;"><img src="logo2.png" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:440px; height:108px;"><img src="logo2.png" alt="ChessKidoo Chess Academy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
         </div>
-        <div data-logo="pila" style="display:flex; flex-direction:column; align-items:center; margin-top:2px;">
-          <div style="width:134px; height:96px;"><img src="pila-logo.JPEG" onerror="this.closest('[data-logo]').style.display='none';" alt="PILA School Logo" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div data-logo="pila" style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:158px; height:108px;"><img src="pila-logo.JPEG" onerror="this.closest('[data-logo]').style.display='none';" alt="PILA School Logo" style="width:100%;height:100%;object-fit:contain;display:block"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center;">
-          <div style="width:120px; height:96px;"><img src="logo3.png" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-          <div style="margin-top:4px; font-size:12px; font-weight:700; color:#3a3a3a; letter-spacing:.4px;">Institution Reg. No.: TN-07-01127105</div>
+          <div style="width:146px; height:108px;"><img src="logo3.png" alt="PILA School Logo" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div style="margin-top:5px; font-size:14px; font-weight:700; color:#3a3a3a; letter-spacing:.4px; white-space:nowrap;">Institution Reg. No.: TN-07-01127105</div>
         </div>
       </div>
 
       <!-- titles -->
-      <div style="font-family:'Playfair Display',serif; font-weight:800; font-size:44px; color:#0b2a52; letter-spacing:1px; margin-top:16px; text-align:center; white-space:nowrap;">THINDAL GRANDMASTER TROPHY</div>
-      <div style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:48px; letter-spacing:1px; line-height:1; margin-top:8px; background:linear-gradient(180deg,#e7ca7c 0%,#c39433 45%,#8a5f1e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; text-align:center; white-space:nowrap; padding: 0 20px; box-sizing: border-box;">Memorable Appreciation Certificate</div>
+      <div style="font-family:'Playfair Display',serif; font-weight:800; font-size:52px; color:#0b2a52; letter-spacing:1px; margin-top:12px; text-align:center; white-space:nowrap;">THINDAL GRANDMASTER TROPHY</div>
+      <div style="font-family:'Playfair Display',serif; font-variant:small-caps; font-weight:700; font-size:52px; letter-spacing:1px; line-height:1; margin-top:6px; background:linear-gradient(180deg,#e7ca7c 0%,#c39433 45%,#8a5f1e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; text-align:center; white-space:nowrap; padding: 0 20px; box-sizing: border-box;">Memorable Appreciation Certificate</div>
 
       <!-- diamond divider -->
-      <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
-        <div style="width:120px; height:1.5px; background:linear-gradient(90deg,transparent,#c69a3a);"></div>
-        <div style="width:11px; height:11px; background:#c69a3a; transform:rotate(45deg);"></div>
-        <div style="width:120px; height:1.5px; background:linear-gradient(90deg,#c69a3a,transparent);"></div>
+      <div style="display:flex; align-items:center; gap:14px; margin-top:12px;">
+        <div style="width:170px; height:2px; background:linear-gradient(90deg,transparent,#c69a3a);"></div>
+        <div style="width:13px; height:13px; background:#c69a3a; transform:rotate(45deg);"></div>
+        <div style="width:170px; height:2px; background:linear-gradient(90deg,#c69a3a,transparent);"></div>
       </div>
 
-      <div style="font-size:24px; color:#0b2a52; margin-top:12px; letter-spacing:.3px;">This certificate is proudly presented to</div>
+      <div style="font-size:28px; color:#0b2a52; margin-top:10px; letter-spacing:.3px;">This certificate is proudly presented to</div>
 
       <!-- name with laurels -->
-      <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:2px;">
-        <svg width="86" height="180" viewBox="0 0 86 180" fill="#c69a3a"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
-        <div contenteditable="true" spellcheck="false" style="font-family:'Pinyon Script',cursive; font-size:84px; color:#12345f; line-height:1; padding:0 6px; outline:none; min-width:340px; text-align:center;">Participant Name</div>
-        <svg width="86" height="180" viewBox="0 0 86 180" fill="#c69a3a" style="transform:scaleX(-1);"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
+      <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:6px;">
+        <svg width="74" height="154" viewBox="0 0 86 180" fill="#c69a3a"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
+        <div contenteditable="true" spellcheck="false" style="font-family:'Times New Roman',Times,serif; font-weight:700; font-size:84px; color:#12345f; line-height:1.05; padding:0 6px; outline:none; min-width:360px; text-align:center;">Participant Name</div>
+        <svg width="74" height="154" viewBox="0 0 86 180" fill="#c69a3a" style="transform:scaleX(-1);"><g stroke="#c69a3a" stroke-width="2.5" fill="none"><path d="M74 168 C34 138 30 66 60 20"></path></g><g><ellipse cx="70" cy="156" rx="12" ry="4.5" transform="rotate(35 70 156)"></ellipse><ellipse cx="58" cy="138" rx="12" ry="4.5" transform="rotate(20 58 138)"></ellipse><ellipse cx="50" cy="118" rx="12" ry="4.5" transform="rotate(8 50 118)"></ellipse><ellipse cx="46" cy="97" rx="12" ry="4.5" transform="rotate(-4 46 97)"></ellipse><ellipse cx="47" cy="76" rx="12" ry="4.5" transform="rotate(-18 47 76)"></ellipse><ellipse cx="52" cy="56" rx="11" ry="4.2" transform="rotate(-32 52 56)"></ellipse><ellipse cx="59" cy="38" rx="10" ry="4" transform="rotate(-46 59 38)"></ellipse></g></svg>
       </div>
 
       <!-- entry / category / place badge -->
-      <div id="categoryBadge" style="display:none; margin-top:10px; align-items:center; gap:14px; background:linear-gradient(135deg,#0f3a68,#0b2a52); border:2px solid #c69a3a; border-radius:999px; padding:7px 28px; box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:'Outfit',sans-serif;"></div>
+      <div id="categoryBadge" style="display:none; margin-top:12px; align-items:center; gap:16px; background:linear-gradient(135deg,#0f3a68,#0b2a52); border:2px solid #c69a3a; border-radius:999px; padding:7px 30px; box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:'Outfit',sans-serif;"></div>
 
       <!-- prize line (winners only) -->
-      <div id="prizeLine" style="display:none; margin-top:10px; font-family:'Playfair Display',serif; font-size:23px; font-weight:800; letter-spacing:2px; color:#a8201e; white-space:nowrap;">PRIZE : WINNER TROPHY</div>
+      <div id="prizeLine" style="display:none; margin-top:6px; font-family:'Playfair Display',serif; font-size:22px; font-weight:800; letter-spacing:2px; color:#a8201e; white-space:nowrap;">PRIZE : WINNER TROPHY</div>
 
       <!-- event date + venue ribbon -->
-      <div style="position:relative; margin-top:6px; background:#0f3a68; border:2px solid #c69a3a; padding:9px 46px; clip-path:polygon(18px 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0 50%); display:flex; flex-direction:column; align-items:center; gap:5px;">
+      <div style="position:relative; margin-top:10px; background:#0f3a68; border:2px solid #c69a3a; padding:9px 26px; clip-path:polygon(18px 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 18px 100%, 0 50%); display:flex; flex-direction:column; align-items:center; gap:6px;">
         <div style="display:flex; align-items:center; gap:12px;">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e7ca7c" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
-          <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; letter-spacing:1px; color:#f4efe1; white-space:nowrap;">EVENT DATE : <span style="color:#e7ca7c;">19<sup style="font-size:.6em;">TH</sup></span> OF JULY 2026</span>
+          <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:26px; letter-spacing:1px; color:#f4efe1; white-space:nowrap;">EVENT DATE : <span style="color:#e7ca7c;">4<sup style="font-size:.6em;">TH</sup></span> OCTOBER 2026</span>
         </div>
-        <div style="width:74%; height:1px; background:linear-gradient(90deg,transparent,rgba(231,202,124,.65),transparent);"></div>
+        <div style="width:78%; height:1px; background:linear-gradient(90deg,transparent,rgba(231,202,124,.65),transparent);"></div>
         <div style="display:flex; align-items:center; gap:12px;">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e7ca7c" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:22px; letter-spacing:.6px; color:#f4efe1; white-space:nowrap;">VENUE : <span style="color:#e7ca7c;">PILA SCHOOL, PARVESH INTERNATIONAL LEARNERS ACADEMY</span></span>
+          <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:23px; letter-spacing:.6px; color:#f4efe1; white-space:nowrap;">VENUE : <span style="color:#e7ca7c;">PILA SCHOOL, PARVESH INTERNATIONAL LEARNERS ACADEMY</span></span>
         </div>
       </div>
 
       <!-- paragraph -->
-      <div id="awardText" style="margin-top:16px; text-align:center; font-size:19.5px; line-height:1.5; color:#1c2a44; max-width:660px;">
-        in appreciation of enthusiastic participation and support for the <b style="color:#a8201e;">THINDAL GRANDMASTER TROPHY</b> organized by <b style="color:#0b2a52;">ChessKidoo Chess Academy.</b><br>Your passion for chess contributes to the growth of strategic thinking, sportsmanship, and the global chess community.
+      <div id="awardText" style="margin-top:16px; text-align:center; font-size:19px; line-height:1.5; color:#1c2a44; max-width:1000px;">
+        in appreciation of enthusiastic participation and support for the <b style="color:#a8201e;">THINDAL GRANDMASTER TROPHY</b> organized by <b style="color:#0b2a52;">ChessKidoo Chess Academy.</b><br>Your passion for chess grows strategic thinking, sportsmanship and the global chess community.
       </div>
     </div>
 
-    <!-- signatures: founder + director -->
-    <div style="position:absolute; left:50%; transform:translateX(-50%); bottom:74px; display:flex; align-items:flex-end; justify-content:center; gap:70px; text-align:center;">
+    <!-- signatures: joint secretary + director -->
+    <div id="signatures" style="position:absolute; left:50%; transform:translateX(-50%); bottom:72px; display:flex; align-items:flex-end; justify-content:center; gap:88px; text-align:center;">
       <div>
-        <div style="font-family:'Pinyon Script','Segoe Script',cursive; font-size:52px; color:#0d2a52; line-height:.85; transform:rotate(-5deg); display:inline-block; padding:0 10px; text-shadow:0 1px 1px rgba(13,42,82,.25); font-weight:400; white-space:nowrap;">Rathanvel V S</div>
-        <div style="width:250px; height:2px; background:linear-gradient(90deg,transparent,#1c2a44 15%,#1c2a44 85%,transparent); margin:4px auto 0;"></div>
-        <div style="font-size:16px; font-weight:700; letter-spacing:1px; color:#0b2a52; margin-top:7px;">FOUNDER</div>
-        <div style="font-size:14px; color:#1c2a44; margin-top:2px;">India's 99th Grandmaster</div>
+        <div style="font-family:'Pinyon Script','Segoe Script',cursive; font-size:46px; color:#0d2a52; line-height:.9; transform:rotate(-5deg); display:inline-block; padding:0 10px; text-shadow:0 1px 1px rgba(13,42,82,.25); font-weight:400; white-space:nowrap;">Vishnu</div>
+        <div style="width:250px; height:2px; background:linear-gradient(90deg,transparent,#1c2a44 15%,#1c2a44 85%,transparent); margin:5px auto 0;"></div>
+        <div style="font-size:14px; font-weight:700; letter-spacing:1.2px; color:#0b2a52; margin-top:6px; white-space:nowrap;">JOINT SECRETARY</div>
+        <div style="font-size:13px; color:#1c2a44; margin-top:2px; white-space:nowrap;">ChessKidoo Chess Academy</div>
       </div>
       <div>
-        <div style="font-family:'Pinyon Script','Segoe Script',cursive; font-size:58px; color:#0d2a52; line-height:.85; transform:rotate(-5deg); display:inline-block; padding:0 10px; text-shadow:0 1px 1px rgba(13,42,82,.25); font-weight:400;">Ranjith A.S.</div>
-        <div style="width:230px; height:2px; background:linear-gradient(90deg,transparent,#1c2a44 15%,#1c2a44 85%,transparent); margin:4px auto 0;"></div>
-        <div style="font-size:16px; font-weight:700; letter-spacing:1px; color:#0b2a52; margin-top:7px;">CHESSKIDOO CHESS ACADEMY</div>
-        <div style="font-size:15px; color:#1c2a44; margin-top:2px;">Director</div>
+        <div style="font-family:'Pinyon Script','Segoe Script',cursive; font-size:46px; color:#0d2a52; line-height:.9; transform:rotate(-5deg); display:inline-block; padding:0 10px; text-shadow:0 1px 1px rgba(13,42,82,.25); font-weight:400; white-space:nowrap;">Ranjith A.S.</div>
+        <div style="width:250px; height:2px; background:linear-gradient(90deg,transparent,#1c2a44 15%,#1c2a44 85%,transparent); margin:5px auto 0;"></div>
+        <div style="font-size:14px; font-weight:700; letter-spacing:1.2px; color:#0b2a52; margin-top:6px; white-space:nowrap;">SECRETARY</div>
+        <div style="font-size:13px; color:#1c2a44; margin-top:2px; white-space:nowrap;">ChessKidoo Chess Academy</div>
       </div>
     </div>
 
 
-    <!-- bottom banner -->
-    <div style="position:absolute; left:0; right:0; bottom:0; height:52px; border-top:2px solid #c69a3a; border-bottom:2px solid #c69a3a; display:flex; align-items:center; justify-content:center; gap:16px; background:transparent;">
-      <span style="color:#c69a3a; font-size:16px;">★</span>
-      <span style="font-family:'Outfit',sans-serif; font-weight:600; font-size:19px; letter-spacing:0.5px; color:#0b2a52; white-space:nowrap;">Celebrating the Achievement of India's 99th Grandmaster, <span style="color:#a8201e; font-weight:800; font-size:20px;">Rathanvel V S</span></span>
-      <span style="color:#c69a3a; font-size:16px;">★</span>
+    <!-- bottom banner : certificate number + celebration line -->
+    <div style="position:absolute; left:0; right:0; bottom:0; height:58px; border-top:2px solid #c69a3a; border-bottom:2px solid #c69a3a; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 46px; background:transparent;">
+      <div id="certNumberBox" style="display:flex; align-items:baseline; gap:9px; white-space:nowrap;">
+        <span style="font-family:'Outfit',sans-serif; font-size:12.5px; font-weight:700; letter-spacing:2.2px; color:#8a7c5c;">CERTIFICATE NO</span>
+        <span id="certNumber" style="font-family:'Playfair Display',serif; font-size:22px; font-weight:800; letter-spacing:1.6px; color:#0b2a52;">CK/041026/001</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; white-space:nowrap;">
+        <span style="color:#c69a3a; font-size:16px;">★</span>
+        <span style="font-family:'Outfit',sans-serif; font-weight:600; font-size:19px; letter-spacing:0.5px; color:#0b2a52;">Celebrating the Achievement of India's 99th Grandmaster, <span style="color:#a8201e; font-weight:800; font-size:20px;">Rathanvel V S</span></span>
+        <span style="color:#c69a3a; font-size:16px;">★</span>
+      </div>
+      <div style="width:230px; flex:0 0 230px;"></div>
     </div>
 
   </div>
@@ -167,6 +194,12 @@
         'junior-u15': 'UNDER 15 · JUNIOR',
         'senior': 'SENIOR · OPEN CATEGORY'
     };
+    const CATEGORY_PROSE = {
+        'junior-u9': 'Under 9',
+        'junior-u12': 'Under 12',
+        'junior-u15': 'Under 15',
+        'senior': 'Senior Open'
+    };
     const ROLE_LABELS = {
         'participant': 'PARTICIPANT',
         'winner': 'WINNER'
@@ -176,7 +209,12 @@
         '2': 'SECOND PLACE',
         '3': 'THIRD PLACE',
         '4': 'FOURTH PLACE',
-        '5': 'FIFTH PLACE'
+        '5': 'FIFTH PLACE',
+        '6': 'SIXTH PLACE',
+        '7': 'SEVENTH PLACE',
+        '8': 'EIGHTH PLACE',
+        '9': 'NINTH PLACE',
+        '10': 'TENTH PLACE'
     };
     const EVENT_NAME = 'THINDAL GRANDMASTER TROPHY';
     setTimeout(() => {
@@ -196,29 +234,31 @@
         const badge = document.getElementById('categoryBadge');
         if (badge && segments.length) {
             badge.innerHTML = segments.map(function (seg) {
-                return '<span style="display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">' +
+                return '<span style="display:inline-flex; align-items:center; gap:9px; white-space:nowrap;">' +
                     '<span style="font-size:13px; font-weight:700; letter-spacing:2px; color:#e7ca7c;">' + seg[0] + '</span>' +
-                    '<span style="font-size:19px; font-weight:800; letter-spacing:.8px; color:#f4efe1;">' + seg[1] + '</span>' +
+                    '<span style="font-size:20px; font-weight:800; letter-spacing:.8px; color:#f4efe1;">' + seg[1] + '</span>' +
                     '</span>';
-            }).join('<span style="width:1px; height:20px; background:rgba(231,202,124,.5);"></span>');
+            }).join('<span style="width:1px; height:18px; background:rgba(231,202,124,.5);"></span>');
             badge.style.display = 'inline-flex';
         }
 
-        // --- award wording follows the entry type and place ---
+        // --- award wording follows the entry type, category level and place ---
         const awardText = document.getElementById('awardText');
         if (awardText) {
             const organizer = '<b style="color:#0b2a52;">ChessKidoo Chess Academy.</b>';
             const event = '<b style="color:#a8201e;">' + EVENT_NAME + '</b>';
+            // Short prose form of the level, e.g. "Under 9" / "Senior Open"
+            const levelProse = CATEGORY_PROSE[category] ? ' in the <b style="color:#a8201e;">' + CATEGORY_PROSE[category] + '</b> category' : '';
             let lead;
             if (isWinner && placeLabel) {
-                lead = 'in proud recognition of winning <b style="color:#a8201e;">' + placeLabel + '</b> at the ' + event + ' organized by ' + organizer;
+                lead = 'in proud recognition of winning <b style="color:#a8201e;">' + placeLabel + '</b>' + levelProse + ' at the ' + event + ' organized by ' + organizer;
             } else if (isWinner) {
-                lead = 'in proud recognition of outstanding performance at the ' + event + ' organized by ' + organizer;
+                lead = 'in proud recognition of outstanding performance' + levelProse + ' at the ' + event + ' organized by ' + organizer;
             } else {
-                lead = 'in appreciation of enthusiastic participation and support for the ' + event + ' organized by ' + organizer;
+                lead = 'in appreciation of enthusiastic participation' + levelProse + ' and support for the ' + event + ' organized by ' + organizer;
             }
             awardText.innerHTML = lead +
-                '<br>Your passion for chess contributes to the growth of strategic thinking, sportsmanship, and the global chess community.';
+                '<br>Your passion for chess grows strategic thinking, sportsmanship and the global chess community.';
         }
 
         // --- prize line: only real winners (places 1-3) get the trophy ---
@@ -230,36 +270,96 @@
 
         let name = urlParams.get('name');
         if (name) {
-            // Convert to Title Case for elegant cursive rendering in Pinyon Script
+            // Convert to Title Case for a clean, formal look
             name = name.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
             const nameEl = document.querySelector('[contenteditable="true"]');
-            if (nameEl) {
-                nameEl.innerText = name;
-                nameEl.style.fontFamily = "'Pinyon Script', cursive";
-                nameEl.style.fontWeight = "400";
-                nameEl.style.whiteSpace = "nowrap";
-                nameEl.style.maxWidth = "820px";
-                nameEl.style.overflow = "hidden";
-                // Auto-shrink long names so they never collide with the laurels
-                let fs = 84;
-                nameEl.style.fontSize = fs + "px";
-                while (nameEl.scrollWidth > 820 && fs > 30) {
-                    fs -= 2;
-                    nameEl.style.fontSize = fs + "px";
-                }
-            }
+            if (nameEl) nameEl.innerText = name;
         }
 
+        // Keep the name inside the laurels: shrink it until it fits.
+        const NAME_MAX_W = 790;
+        function fitName() {
+            const nameEl = document.querySelector('[contenteditable="true"]');
+            if (!nameEl || !nameEl.innerText.trim()) return;
+            // The two laurels (74px each) plus their gaps eat ~160px of the
+            // 992px centre column, so the name box may grow to ~790px.
+            nameEl.style.fontFamily = "'Times New Roman', Times, serif";
+            nameEl.style.fontWeight = "700";
+            nameEl.style.whiteSpace = "nowrap";
+            nameEl.style.maxWidth = NAME_MAX_W + "px";
+            nameEl.style.overflow = "hidden";
+            let fs = 84;
+            nameEl.style.fontSize = fs + "px";
+            while (nameEl.scrollWidth > NAME_MAX_W && fs > 26) {
+                fs -= 2;
+                nameEl.style.fontSize = fs + "px";
+            }
+        }
+        fitName();
+
+        // --- Certificate number: CK/DDMMYY/NN ---
+        // The date block is the day the certificate is issued; NN is a random
+        // serial between 1 and CERT_MAX_SERIAL, kept stable per participant so a
+        // reload (or a Back-and-regenerate round trip) never changes it.
+        const CERT_PREFIX = 'CK';
+        const CERT_MAX_SERIAL = 500;   // total certificates for the day
+        const CERT_SERIAL_WIDTH = String(CERT_MAX_SERIAL).length;
+
+        function certStoreGet(key) {
+            try { return window.localStorage.getItem(key); } catch (e) { return null; }
+        }
+        function certStoreSet(key, value) {
+            try { window.localStorage.setItem(key, value); } catch (e) { /* private mode */ }
+        }
+        function makeCertNumber() {
+            const now = new Date();
+            const stamp = String(now.getDate()).padStart(2, '0') +
+                String(now.getMonth() + 1).padStart(2, '0') +
+                String(now.getFullYear() % 100).padStart(2, '0');
+            // Remember the serials already handed out today so this device never
+            // prints the same number twice for two different participants.
+            const issuedKey = 'ckIssued_' + stamp;
+            let issued = [];
+            try { issued = JSON.parse(certStoreGet(issuedKey) || '[]'); } catch (e) { issued = []; }
+            if (!Array.isArray(issued)) issued = [];
+            let serial = '';
+            for (let attempt = 0; attempt < 200; attempt++) {
+                serial = String(1 + Math.floor(Math.random() * CERT_MAX_SERIAL))
+                    .padStart(CERT_SERIAL_WIDTH, '0');
+                if (issued.indexOf(serial) === -1) break;
+            }
+            issued.push(serial);
+            certStoreSet(issuedKey, JSON.stringify(issued));
+            return CERT_PREFIX + '/' + stamp + '/' + serial;
+        }
+        function resolveCertNumber(who) {
+            const fromUrl = (urlParams.get('cert') || '').trim().toUpperCase();
+            if (fromUrl) return fromUrl;
+            const key = 'ckCertNo_' + (who || 'anonymous').toLowerCase().replace(/\s+/g, '_');
+            const saved = certStoreGet(key);
+            if (saved) return saved;
+            const fresh = makeCertNumber();
+            certStoreSet(key, fresh);
+            return fresh;
+        }
+        const certNumberEl = document.getElementById('certNumber');
+        if (certNumberEl) {
+            const shownName = ((document.querySelector('[contenteditable="true"]') || {}).innerText || name || '').trim();
+            certNumberEl.textContent = resolveCertNumber(shownName || name || '');
+        }
+
+        // Layout of the toolbar lives in the injected stylesheet (not inline) so the
+        // mobile media query can turn it into a bottom action bar.
         const toolbar = document.createElement('div');
         toolbar.className = 'cert-toolbar';
-        toolbar.style.cssText = 'position:fixed; top:20px; right:20px; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px; max-width:calc(100vw - 32px); z-index:99999; font-family:-apple-system, BlinkMacSystemFont, sans-serif;';
 
         const mkBtn = (text, bg, fg, border) => {
             const b = document.createElement('button');
+            b.type = 'button';
             b.innerText = text;
-            b.style.cssText = 'padding:12px 24px; background:' + bg + '; color:' + fg + '; border:' + (border || 'none') + '; border-radius:6px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3); transition:transform 0.1s;';
-            b.onmouseenter = () => b.style.transform = 'scale(1.05)';
-            b.onmouseleave = () => b.style.transform = 'scale(1)';
+            b.style.background = bg;
+            b.style.color = fg;
+            b.style.border = border || 'none';
             return b;
         };
 
@@ -287,6 +387,11 @@
             return false;
         }
 
+        // The toolbar is hidden with a class (not inline styles) so the mobile
+        // media query keeps control of its layout.
+        const hideToolbar = () => toolbar.classList.add('is-hidden');
+        const showToolbar = () => toolbar.classList.remove('is-hidden');
+
         const btnBack = mkBtn('\u2190 Back', '#0b2a52', '#c69a3a', '2px solid #c69a3a');
         btnBack.onclick = () => { window.location.href = 'index.html'; };
 
@@ -296,9 +401,9 @@
         const btnPrint = mkBtn('\ud83d\udda8 Print', '#c69a3a', '#0b2a52');
         btnPrint.onclick = () => {
             if (!requireWinnerCode()) return;
-            toolbar.style.display = 'none';
+            hideToolbar();
             window.print();
-            toolbar.style.display = 'flex';
+            showToolbar();
         };
 
         toolbar.appendChild(btnBack);
@@ -315,12 +420,27 @@
         // scaled footprint — otherwise the un-shrunk 1060px layout box leaves a
         // huge blank area below the certificate on phones/tablets.
         let certWrap = null;
+        let certSpacer = null;
         if (cert) {
             certWrap = document.createElement('div');
             certWrap.className = 'cert-wrap';
             cert.parentNode.insertBefore(certWrap, cert);
             certWrap.appendChild(cert);
+            // Spacer so the fixed bottom action bar never sits on the certificate.
+            certSpacer = document.createElement('div');
+            certSpacer.className = 'cert-spacer';
+            certWrap.parentNode.insertBefore(certSpacer, certWrap.nextSibling);
         }
+
+        // --- Web fonts: wait for the faces AND for the same-origin @font-face mirror,
+        // otherwise the exporter falls back to system typefaces in the PDF.
+        async function fontsSettled() {
+            try { if (window.__fontMirrorReady) await window.__fontMirrorReady; } catch (e) {}
+            if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
+        }
+        // Re-fit the name once the real webfonts land, because the auto-shrink
+        // measures text width and fallback metrics differ from the real ones.
+        fontsSettled().then(fitName);
 
         // --- Download as PDF: render the certificate to a high-res image, wrap in a PDF ---
         function loadScript(src) {
@@ -368,37 +488,56 @@
             const brokenFonts = Array.from(document.querySelectorAll('style'))
                 .find(s => s.textContent.indexOf('cyrillic-ext') !== -1 && s.textContent.indexOf('@font-face') !== -1);
             try {
-                await ensureLibs();
+await ensureLibs();
                 // Reset to native 1484x1060 BEFORE capturing so the whole board is
                 // rendered regardless of the on-screen (mobile) scale factor.
                 cert.style.transform = 'none';
                 cert.style.marginBottom = '0';
-                toolbar.style.display = 'none';
+                hideToolbar();
                 if (brokenFonts) brokenFonts.remove();
                 // Wait for fonts AND images so nothing renders blank.
-                if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
+                await fontsSettled();
                 await waitForImages(cert);
 
-                const opts = {
-                    width: 1484,
-                    height: 1060,
-                    pixelRatio: 2,
-                    backgroundColor: '#ffffff',
-                    style: { transform: 'none', margin: '0' }
-                };
-                // Pre-compute the web-font CSS once. If it fails (offline / CORS),
-                // fall back to skipping fonts instead of aborting the whole export.
+                // Phones get a 1.5x raster: still crisp when the PDF is zoomed, but
+                // roughly halves the canvas memory so low-end devices don't die on a
+                // 2968x2120 bitmap.
+                const baseRatio = MOBILE_QUERY.matches ? 1.5 : 2;
+                // Embed the web fonts ONCE. getFontEmbedCSS re-fetches and re-encodes
+                // every face (~750KB of base64), so calling it per retry made the
+                // export crawl on phones.
+                let fontEmbedCSS = null;
                 if (window.htmlToImage.getFontEmbedCSS) {
-                    try {
-                        opts.fontEmbedCSS = await window.htmlToImage.getFontEmbedCSS(cert);
-                    } catch (e) { opts.skipFonts = true; }
+                    try { fontEmbedCSS = await window.htmlToImage.getFontEmbedCSS(cert); }
+                    catch (e) { fontEmbedCSS = null; }
                 }
+                let dataUrl = null;
+                let lastErr = null;
+                for (const ratio of [baseRatio, 1, 0.75]) {
+                    try {
+                        const opts = {
+                            width: 1484,
+                            height: 1060,
+                            pixelRatio: ratio,
+                            backgroundColor: '#ffffff',
+                            style: { transform: 'none', margin: '0' }
+                        };
+                        // Fall back to skipping fonts (instead of aborting the export)
+                        // if the @font-face rules could not be read.
+                        if (fontEmbedCSS) opts.fontEmbedCSS = fontEmbedCSS; else opts.skipFonts = true;
 
-                // html-to-image's first pass frequently misses late-resolving
-                // images/fonts, so warm up once and keep the second, complete render.
-                await window.htmlToImage.toPng(cert, opts);
-                await new Promise(r => setTimeout(r, 120));
-                const dataUrl = await window.htmlToImage.toPng(cert, opts);
+                        // html-to-image's first pass frequently misses late-resolving
+                        // images/fonts, so warm up once and keep the second, complete render.
+                        await window.htmlToImage.toPng(cert, opts);
+                        await new Promise(r => setTimeout(r, 120));
+                        dataUrl = await window.htmlToImage.toPng(cert, opts);
+                        lastErr = null;
+                        break;
+                    } catch (e) {
+                        lastErr = e;
+                    }
+                }
+                if (!dataUrl) throw lastErr || new Error('Could not render the certificate');
 
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [1484, 1060] });
@@ -407,7 +546,15 @@
                 const nameEl = document.querySelector('[contenteditable="true"]');
                 const liveName = ((nameEl && nameEl.innerText) || name || 'Certificate').trim();
                 const safe = liveName.replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '') || 'Certificate';
-                pdf.save('ChessDay-Certificate-' + safe + '.pdf');
+                const fileName = 'ChessDay-Certificate-' + safe + '.pdf';
+                try {
+                    pdf.save(fileName);
+                } catch (saveErr) {
+                    // Older iOS Safari blocks the download attribute — open it instead.
+                    const url = pdf.output('bloburl');
+                    const opened = window.open(url, '_blank');
+                    if (!opened) throw saveErr;
+                }
             } catch (err) {
                 const msg = (err && err.message) ? err.message : String(err);
                 const isLocalFile = location.protocol === 'file:';
@@ -419,7 +566,7 @@
                 if (brokenFonts && !brokenFonts.parentNode) document.head.appendChild(brokenFonts);
                 cert.style.transform = savedTransform;
                 cert.style.marginBottom = savedMargin;
-                toolbar.style.display = 'flex';
+                showToolbar();
                 btnDownload.innerText = label;
                 btnDownload.disabled = false;
                 btnDownload.style.opacity = '1';
@@ -432,29 +579,100 @@
         style.textContent = `
             html, body { margin: 0; padding: 0; }
 
-            /* === Mobile / small screens === */
-            @media screen and (max-width: 1500px) {
-                html, body { overflow-x: hidden; background: #23272e; }
+            /* === Toolbar: floating pill on desktop, bottom action bar on phones === */
+            .cert-toolbar {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 10px;
+                max-width: calc(100vw - 40px);
+                z-index: 99999;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+            .cert-toolbar.is-hidden { display: none !important; }
+            .cert-toolbar button {
+                min-height: 44px;
+                padding: 11px 20px;
+                border-radius: 8px;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 1.2;
+                cursor: pointer;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+                transition: transform .1s ease, opacity .15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .cert-toolbar button:active { transform: scale(.97); }
+            .cert-toolbar button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+            .cert-spacer { height: 0; }
+
+            /* Keep the page from ever scrolling sideways because of the scaled cert */
+            html, body { overflow-x: hidden; background: #23272e; }
+
+            /* === Phones / small tablets === */
+            @media screen and (max-width: 820px) {
+                /* Bottom bar: never covers the certificate, thumb-reachable */
                 .cert-toolbar {
-                    top: 10px !important;
-                    right: 10px !important;
-                    gap: 6px !important;
+                    top: auto !important;
+                    right: 0 !important;
+                    left: 0 !important;
+                    bottom: 0 !important;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    gap: 8px;
+                    max-width: 100%;
+                    padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+                    background: rgba(9, 20, 38, .94);
+                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: blur(10px);
+                    border-top: 1px solid rgba(198, 154, 58, .55);
+                    box-shadow: 0 -4px 18px rgba(0, 0, 0, .45);
                 }
                 .cert-toolbar button {
-                    padding: 8px 12px !important;
-                    font-size: 12px !important;
+                    flex: 1 1 0;
+                    min-width: 0;
+                    min-height: 46px;
+                    padding: 10px 6px;
+                    font-size: 12.5px;
+                    letter-spacing: .2px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                /* Room for the fixed bar so the certificate is never half-covered */
+                .cert-spacer { height: 76px; }
+                /* Centre the certificate in whatever space is left */
+                body.cert-page {
+                    min-height: 100vh;
+                    min-height: 100dvh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                .cert-hint {
+                    display: block;
+                    margin: 10px auto 0;
+                    padding: 0 16px 4px;
+                    text-align: center;
+                    font: 500 12px/1.4 'Outfit', -apple-system, sans-serif;
+                    color: rgba(255, 255, 255, .6);
+                    letter-spacing: .3px;
                 }
             }
-            @media screen and (max-width: 500px) {
-                .cert-toolbar button {
-                    padding: 6px 10px !important;
-                    font-size: 11px !important;
-                }
+            @media screen and (max-width: 380px) {
+                .cert-toolbar { gap: 6px; padding-left: 6px; padding-right: 6px; }
+                .cert-toolbar button { font-size: 11.5px; padding: 10px 4px; }
             }
 
             /* === Print: always fit on ONE page, whatever the orientation === */
             @media print {
                 .cert-toolbar { display: none !important; }
+                .cert-spacer { height: 0 !important; }
+                .cert-hint { display: none !important; }
                 /* Undo the on-screen wrapper sizing so the full certificate prints */
                 .cert-wrap {
                     width: auto !important;
@@ -506,10 +724,23 @@
 
         // === Viewport scaling: scale the certificate down to fit the screen and
         // give its wrapper the EXACT scaled size so there's no leftover whitespace. ===
+        const MOBILE_QUERY = window.matchMedia('(max-width: 820px)');
+
+        // Pinch-zoom hint, only ever visible on the phone layout.
+        if (certWrap) {
+            const hint = document.createElement('div');
+            hint.className = 'cert-hint';
+            hint.textContent = 'Pinch to zoom \u00b7 tap the name to edit';
+            certWrap.parentNode.insertBefore(hint, certWrap.nextSibling);
+        }
+        document.body.classList.add('cert-page');
+
         function fitCert() {
             if (!cert || !certWrap || window.matchMedia('print').matches) return;
             const vw = document.documentElement.clientWidth;
-            const scale = Math.min(vw / 1484, 1);
+            // Leave a small gutter on phones so the certificate is not edge-to-edge
+            const gutter = MOBILE_QUERY.matches ? 16 : 0;
+            const scale = Math.min((vw - gutter) / 1484, 1);
             cert.style.transformOrigin = 'top left';
             cert.style.transform = scale < 1 ? 'scale(' + scale + ')' : 'none';
             cert.style.margin = '0';
@@ -520,6 +751,7 @@
         }
         window.addEventListener('resize', fitCert);
         window.addEventListener('orientationchange', fitCert);
+        if (MOBILE_QUERY.addEventListener) MOBILE_QUERY.addEventListener('change', fitCert);
         fitCert();
     }, 200);
 </script>

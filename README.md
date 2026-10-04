@@ -9,14 +9,20 @@ Participants can enter their name, preview a personalized **Memorable Appreciati
 ## ✨ Features
 
 - 🏠 **Landing Page** — Beautiful front page featuring legendary Chess Grandmasters (Magnus Carlsen, Viswanathan Anand, Garry Kasparov, Bobby Fischer, Gukesh Damothiran, Rathanvel V S)
+- 🏛️ **Organiser Credit** — Event *Managed & Coordinated by **Hindusthan Chess Cell***, with venue and date shown up front
 - 📝 **Name Entry** — Simple form to enter participant name
 - 🏅 **Category Selection** — Choose **Junior** (Under 9 / Under 12 / Under 15) or **Senior – Open**; the category is printed as a badge on the certificate
-- 🏆 **Entry Type & Place** — Mark the entry as **Participant** or **Winner**; winners additionally type their place `1`–`5`, which resolves to First / Second / Third / Fourth / Fifth Place on the certificate
+- 🏆 **Entry Type & Place** — Mark the entry as **Participant** or **Winner**; winners type their place, which resolves to First / Second / Third … on the certificate. **Junior** awards 5 places, **Senior – Open** awards 10
 - 🔒 **Winner Code** — Winner certificates stay locked until the organiser code is entered; Download / Print re-check it, and places 1–3 print `PRIZE : WINNER TROPHY`
-- 🔠 **Auto Uppercase** — Names are automatically converted to uppercase for a professional look
+- 🔢 **Certificate Number** — Every certificate gets a unique, random serial printed in the bottom bar, e.g. `CK/041026/137` (`CK` prefix · issue date `DDMMYY` · random number 1–500). The number is remembered per participant, so reloading never changes it
+- 🔠 **Title Case Name** — Names are automatically normalised for a clean, formal look
 - 📜 **Live Certificate Preview** — Instantly generates a personalized certificate with the entered name
+- 📱 **Mobile First** — On phones the controls move to a thumb‑reachable bottom bar with 44px+ tap targets; the certificate scales to the screen with no sideways scroll
+- ⬇️ **Download PDF** — Renders the certificate to a high‑resolution image and wraps it in a landscape PDF. Web fonts are embedded so the PDF matches the screen, and the raster step automatically retries at a lower resolution on memory‑constrained phones
 - 🖨️ **Print-Optimized** — One-click printing with edge-to-edge landscape layout, no wasted space
-- 🎨 **Rich Design** — Gold gradient text, decorative borders, organization logos, and GM photos
+- 🎨 **Rich Design** — Gold gradient text, decorative borders, larger organisation logos, and GM photos
+
+> **Note on downloading:** the PDF export needs the page served over `http(s)` (the published link, or a local server such as `npx -y http-server`). Opening the files directly as `file://` works for viewing and printing, but browsers block reading local images for the export.
 
 ---
 
@@ -32,9 +38,9 @@ npx -y http-server -p 8080 -c-1
 Then visit [http://localhost:8080](http://localhost:8080)
 
 ### Workflow
-1. Open `index.html` → Enter your name → Choose Participant or Winner → Pick a category (Junior → age group, or Senior – Open) → If winner, type the place `1`–`#5` → Click **"Generate Certificate"**
-2. Preview the personalized certificate
-3. Click **🖨 Print** to print or save as PDF
+1. Open `index.html` → Enter your name → Choose Participant or Winner → Pick a category (Junior → age group, or Senior – Open) → If winner, type your place (`1`–`5` for Junior, `1`–`10` for Open) → Click **"Generate Certificate"**
+2. Preview the personalized certificate (note the certificate number in the bottom bar)
+3. Click **⬇ Download PDF** to save it, or **🖨 Print** to print
 4. Click **← Back** to generate another certificate
 
 ---
@@ -65,7 +71,7 @@ Then visit [http://localhost:8080](http://localhost:8080)
 - **HTML5** — Structure and layout
 - **CSS3** — Styling, gradients, responsive print media queries
 - **Vanilla JavaScript** — Name processing, toolbar, print handling
-- **Google Fonts** — Outfit, Playfair Display, Pinyon Script
+- **Google Fonts** — Outfit, Playfair Display, Pinyon Script (participant names are set in Times New Roman for maximum legibility)
 
 No frameworks. No build tools. No dependencies. Just open and run.
 
@@ -76,12 +82,15 @@ No frameworks. No build tools. No dependencies. Just open and run.
 | Detail | Info |
 |--------|------|
 | **Event** | Thindal Grandmaster Trophy |
-| **Date** | 19th July 2026 |
+| **Date** | 4th October 2026 |
 | **Venue** | PILA SCHOOL, Parvesh International Learners Academy |
+| **Managed & Coordinated by** | Hindusthan Chess Cell |
 | **Organizer** | ChessKidoo Chess Academy |
-| **Categories** | Junior — Under 9 / Under 12 / Under 15 · Senior — Open |
-| **Director** | Ranjith A.S. |
+| **Categories** | Junior — Under 9 / Under 12 / Under 15 (5 places) · Senior — Open (10 places) |
+| **Joint Secretary** | Vishnu |
+| **Secretary** | Ranjith A.S. |
 | **Founder** | Rathanvel V S (India's 99th Grandmaster) |
+| **Certificate No. format** | `CK/DDMMYY/NNN` — e.g. `CK/041026/137` |
 
 ---
 
