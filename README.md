@@ -13,7 +13,7 @@ Participants can enter their name, preview a personalized **Memorable Appreciati
 - 📝 **Name Entry** — Simple form to enter participant name
 - 🏅 **Category Selection** — Choose **Junior** (Under 9 / Under 12 / Under 15) or **Senior – Open**; the category is printed as a badge on the certificate
 - 🏆 **Entry Type & Place** — Mark the entry as **Participant** or **Winner**; winners type their place, which resolves to First / Second / Third … on the certificate. **Junior** awards 5 places, **Senior – Open** awards 10
-- 🔒 **Winner Code** — Winner certificates stay locked until the organiser code is entered; Download / Print re-check it, and places 1–3 print `PRIZE : WINNER TROPHY`
+- 🔒 **Winner Code** — The organiser code field is always visible on the form (with a Show/Hide toggle so you can see what you typed). Winner certificates stay locked until the code is entered; Download / Print re-check it, and places 1–3 print `PRIZE : WINNER TROPHY`
 - 🔢 **Certificate Number** — Every certificate gets a unique, random serial printed in the bottom bar, e.g. `CK/041026/137` (`CK` prefix · issue date `DDMMYY` · random number 1–500). The number is remembered per participant, so reloading never changes it
 - 🔠 **Title Case Name** — Names are automatically normalised for a clean, formal look
 - 📜 **Live Certificate Preview** — Instantly generates a personalized certificate with the entered name

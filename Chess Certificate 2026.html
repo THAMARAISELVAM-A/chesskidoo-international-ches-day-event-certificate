@@ -128,7 +128,7 @@
       </div>
 
       <!-- entry / category / place badge -->
-      <div id="categoryBadge" style="display:none; margin-top:12px; align-items:center; gap:16px; background:linear-gradient(135deg,#0f3a68,#0b2a52); border:2px solid #c69a3a; border-radius:999px; padding:7px 30px; box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:'Outfit',sans-serif;"></div>
+      <div id="categoryBadge" style="display:none; margin-top:12px; align-items:center; gap:0; background:linear-gradient(135deg,#0f3a68,#0b2a52); border:2px solid #c69a3a; border-radius:999px; padding:9px 30px; box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:'Outfit',sans-serif;"></div>
 
       <!-- prize line (winners only) -->
       <div id="prizeLine" style="display:none; margin-top:6px; font-family:'Playfair Display',serif; font-size:22px; font-weight:800; letter-spacing:2px; color:#a8201e; white-space:nowrap;">PRIZE : WINNER TROPHY</div>
@@ -192,7 +192,9 @@
         'junior-u9': 'UNDER 9 · JUNIOR',
         'junior-u12': 'UNDER 12 · JUNIOR',
         'junior-u15': 'UNDER 15 · JUNIOR',
-        'senior': 'SENIOR · OPEN CATEGORY'
+        // Kept short on purpose: "SENIOR - OPEN CATEGORY" made the badge so wide
+        // that it had to be letter-spaced tightly to fit the certificate.
+        'senior': 'SENIOR · OPEN'
     };
     const CATEGORY_PROSE = {
         'junior-u9': 'Under 9',
@@ -234,11 +236,16 @@
         const badge = document.getElementById('categoryBadge');
         if (badge && segments.length) {
             badge.innerHTML = segments.map(function (seg) {
-                return '<span style="display:inline-flex; align-items:center; gap:9px; white-space:nowrap;">' +
-                    '<span style="font-size:13px; font-weight:700; letter-spacing:2px; color:#e7ca7c;">' + seg[0] + '</span>' +
-                    '<span style="font-size:20px; font-weight:800; letter-spacing:.8px; color:#f4efe1;">' + seg[1] + '</span>' +
+                // flex:0 0 auto so a long category ("SENIOR - OPEN CATEGORY") can
+                // never be squeezed narrower than its text, which is what made the
+                // letters look cramped once the board was exported.
+                return '<span style="display:inline-flex; align-items:baseline; gap:12px; white-space:nowrap; flex:0 0 auto;">' +
+                    '<span style="font-size:13px; font-weight:700; letter-spacing:2.2px; color:#e7ca7c;">' + seg[0] + '</span>' +
+                    '<span style="font-size:21px; font-weight:800; letter-spacing:1.4px; color:#f4efe1;">' + seg[1] + '</span>' +
                     '</span>';
-            }).join('<span style="width:1px; height:18px; background:rgba(231,202,124,.5);"></span>');
+            // Explicit margins rather than flex `gap`: SVG/foreignObject rasterisers
+            // reproduce `gap` inconsistently, margins come through identically.
+            }).join('<span style="display:inline-block; width:1px; height:20px; margin:0 13px; background:rgba(231,202,124,.55); flex:0 0 auto;"></span>');
             badge.style.display = 'inline-flex';
         }
 
