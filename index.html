@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>International Chess Day Celebration Certificate</title>
+    <title>Thindal Grandmaster Trophy Celebration Certificate</title>
     <style>
         :root {
             --navy: #0d2b55;
@@ -110,7 +110,9 @@
             color: #fff;
             font-weight: 500;
         }
-        .form-container input {
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container input[type="password"] {
             width: 100%;
             padding: 15px;
             font-size: 1.2rem;
@@ -123,8 +125,87 @@
             color: #0b2a52;
             font-weight: bold;
         }
-        .form-container input:focus {
+        .form-container input[type="text"]:focus,
+        .form-container input[type="number"]:focus,
+        .form-container input[type="password"]:focus {
             box-shadow: 0 0 10px var(--gold);
+        }
+        .field-title {
+            display: block;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            color: var(--light-gold);
+            font-weight: 600;
+            letter-spacing: .5px;
+        }
+        .chip-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .chip-group input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+        }
+        .form-container .chip {
+            display: block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(255,255,255,.06);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 0;
+            transition: all .2s;
+        }
+        .form-container .chip:hover {
+            background: rgba(198,154,58,.2);
+        }
+        .chip-group input[type="radio"]:checked + .chip {
+            background: linear-gradient(135deg, #f2e0a4, #c99a3f);
+            color: #0b2a52;
+            box-shadow: 0 0 14px rgba(198,154,58,.6);
+        }
+        .chip-group input[type="radio"]:focus-visible + .chip {
+            outline: 3px solid #fff;
+            outline-offset: 2px;
+        }
+        #subCategoryWrap {
+            display: none;
+        }
+        #subCategoryWrap.show {
+            display: block;
+        }
+        #placeWrap {
+            display: none;
+        }
+        #placeWrap.show {
+            display: block;
+        }
+        .place-preview {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--light-gold);
+            margin: -12px 0 25px;
+        }
+        .code-message {
+            min-height: 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: -14px 0 18px;
+            color: #ff8a80;
+        }
+        .code-message.ok {
+            color: #7ee787;
         }
         .btn {
             background: linear-gradient(135deg, #f2e0a4, #c99a3f);
@@ -174,10 +255,18 @@
                 margin: 0 auto 25px auto;
             }
             .form-container label { font-size: 1rem; }
-            .form-container input {
+.form-container input[type="text"],
+            .form-container input[type="number"],
+            .form-container input[type="password"] {
                 padding: 12px;
                 font-size: 1rem;
             }
+            #placeInput {
+                max-width: 160px;
+            }
+            .field-title { font-size: 1rem; }
+            .chip-group { gap: 8px; }
+            .form-container .chip { padding: 10px 14px; font-size: .85rem; }
             .btn {
                 padding: 12px 20px;
                 font-size: 1rem;
@@ -195,11 +284,12 @@
     <div class="container">
         <div class="logos">
             <img src="logo2.png" alt="Organizer Logo">
+            <img src="pila-logo.JPEG" alt="PILA School Logo">
             <img src="logo3.png" alt="Academy Logo">
         </div>
         
-        <h1>International Chess Day Celebration Certificate</h1>
-        <p class="subtitle">Honoring your passion for chess and strategic thinking.</p>
+        <h1>Thindal Grandmaster Trophy Celebration Certificate</h1>
+        <p class="subtitle">Venue: PILA SCHOOL, Parvesh International Learners Academy — honoring your passion for chess and strategic thinking.</p>
         
         <div class="gm-grid">
             <div class="gm-card">
@@ -232,18 +322,146 @@
             <form id="name-form" onsubmit="generateCertificate(event)">
                 <label for="participant-name">Enter Your Name for the Certificate</label>
                 <input type="text" id="participant-name" required placeholder="e.g. John Doe">
+
+                <span class="field-title">Are You a Participant or a Winner?</span>
+                <div class="chip-group">
+                    <input type="radio" name="role" id="roleParticipant" value="participant" checked>
+                    <label class="chip" for="roleParticipant">Participant</label>
+                    <input type="radio" name="role" id="roleWinner" value="winner">
+                    <label class="chip" for="roleWinner">Winner</label>
+                </div>
+
+                <span class="field-title">Select Your Category</span>
+                <div class="chip-group">
+                    <input type="radio" name="category" id="catJunior" value="junior" checked>
+                    <label class="chip" for="catJunior">Junior</label>
+                    <input type="radio" name="category" id="catSenior" value="senior">
+                    <label class="chip" for="catSenior">Senior &ndash; Open</label>
+                </div>
+
+                <div id="subCategoryWrap" class="show">
+                    <span class="field-title">Select Your Age Group</span>
+                    <div class="chip-group">
+                        <input type="radio" name="subcategory" id="subU9" value="junior-u9" checked>
+                        <label class="chip" for="subU9">Under 9</label>
+                        <input type="radio" name="subcategory" id="subU12" value="junior-u12">
+                        <label class="chip" for="subU12">Under 12</label>
+                        <input type="radio" name="subcategory" id="subU15" value="junior-u15">
+                        <label class="chip" for="subU15">Under 15</label>
+                    </div>
+                </div>
+
+                <div id="placeWrap">
+                    <span class="field-title">Enter Your Place (Winners only)</span>
+                    <input type="number" id="placeInput" min="1" max="5" step="1" placeholder="1 - 5" inputmode="numeric">
+                    <p id="placePreview" class="place-preview">1 = First Place &middot; 2 = Second Place &middot; 3 = Third Place &middot; 4 = Fourth Place &middot; 5 = Fifth Place</p>
+
+                    <span class="field-title">Enter Winner Code</span>
+                    <input type="password" id="winnerCode" placeholder="Enter code to unlock the winner certificate" autocomplete="off" spellcheck="false">
+                    <p id="codeMessage" class="code-message">&nbsp;</p>
+                </div>
+
                 <button type="submit" class="btn">Generate Preview</button>
             </form>
         </div>
     </div>
 
     <script>
+        const PLACE_LABELS = {
+            '1': 'FIRST PLACE',
+            '2': 'SECOND PLACE',
+            '3': 'THIRD PLACE',
+            '4': 'FOURTH PLACE',
+            '5': 'FIFTH PLACE'
+        };
+
+        const subCategoryWrap = document.getElementById('subCategoryWrap');
+        const syncSubCategory = () => {
+            subCategoryWrap.classList.toggle('show', document.getElementById('catJunior').checked);
+        };
+        document.querySelectorAll('input[name="category"]').forEach(radio => {
+            radio.addEventListener('change', syncSubCategory);
+        });
+        syncSubCategory();
+
+        const placeWrap = document.getElementById('placeWrap');
+        const placeInput = document.getElementById('placeInput');
+        const placePreview = document.getElementById('placePreview');
+        const PLACE_HINT = '1 = First Place · 2 = Second Place · 3 = Third Place · 4 = Fourth Place · 5 = Fifth Place';
+
+        const syncRole = () => {
+            placeWrap.classList.toggle('show', document.getElementById('roleWinner').checked);
+            syncPlacePreview();
+        };
+
+        function normalisePlace() {
+            const raw = parseInt(placeInput.value, 10);
+            return Number.isNaN(raw) ? '' : Math.min(5, Math.max(1, raw));
+        }
+
+        function syncPlacePreview() {
+            const place = normalisePlace();
+            placePreview.textContent = place ? 'AWARD : ' + PLACE_LABELS[place] : PLACE_HINT;
+        }
+
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', syncRole);
+        });
+        placeInput.addEventListener('input', syncPlacePreview);
+        syncRole();
+
+        const WINNER_CODE = 'CHESSKIDOO37';
+        const winnerCode = document.getElementById('winnerCode');
+        const codeMessage = document.getElementById('codeMessage');
+
+        function winnerCodeAccepted() {
+            return winnerCode.value.trim().toUpperCase() === WINNER_CODE;
+        }
+
+        function setCodeMessage(text, ok) {
+            codeMessage.textContent = text || '\u00a0';
+            codeMessage.classList.toggle('ok', !!ok);
+        }
+
+        winnerCode.addEventListener('input', () => {
+            if (codeMessage.textContent.trim()) setCodeMessage(winnerCodeAccepted() ? 'Code accepted' : 'Incorrect code', winnerCodeAccepted());
+        });
+
         function generateCertificate(e) {
             e.preventDefault();
             const name = document.getElementById('participant-name').value.trim();
+            const isWinner = document.getElementById('roleWinner').checked;
+            const role = isWinner ? 'winner' : 'participant';
+            let category;
+            if (document.getElementById('catSenior').checked) {
+                category = 'senior';
+            } else {
+                const sub = document.querySelector('input[name="subcategory"]:checked');
+                category = sub ? sub.value : 'junior-u9';
+            }
+            const place = isWinner ? normalisePlace() : '';
+
+            if (isWinner && !winnerCodeAccepted()) {
+                setCodeMessage('Incorrect winner code — the winner certificate stays locked', false);
+                winnerCode.focus();
+                return;
+            }
+            if (isWinner && !place) {
+                setCodeMessage('Enter the place (1-5) for this winner', false);
+                placeInput.focus();
+                return;
+            }
+            if (isWinner) {
+                // Remembers the unlocked state so the certificate page can allow
+                // Download / Print without asking for the code again.
+                sessionStorage.setItem('winnerUnlocked', '1');
+            } else {
+                sessionStorage.removeItem('winnerUnlocked');
+            }
+
             if (name) {
-                // Redirect to the certificate page with the name as a URL parameter
-                window.location.href = `Chess Certificate 2026.html?name=${encodeURIComponent(name)}`;
+                // Redirect to the certificate page with the entry details as URL parameters
+                window.location.href = `Chess Certificate 2026.html?name=${encodeURIComponent(name)}&role=${role}&cat=${encodeURIComponent(category)}${place ? '&place=' + place : ''}`;
             }
         }
     </script>
